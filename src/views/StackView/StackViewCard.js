@@ -24,6 +24,7 @@ function getAccessibilityProps(isActive) {
 class Card extends React.Component {
   render() {
     const {
+      bgOnlyDuringTransition,
       children,
       pointerEvents,
       style,
@@ -53,6 +54,14 @@ class Card extends React.Component {
     let flattenedStyle = StyleSheet.flatten(style) || {};
     let { backgroundColor, ...screenStyle } = flattenedStyle;
 
+    const showBg = bgOnlyDuringTransition
+      ? position.interpolate({
+          inputRange: [index, index + 1 - EPS, index + 1],
+          outputRange: [0, 1, 0],
+          extrapolate: 'clamp',
+        })
+      : null;
+
     return (
       <Screen
         pointerEvents={pointerEvents}
@@ -63,6 +72,15 @@ class Card extends React.Component {
         {!transparent && shadowOpacity ? (
           <Animated.View
             style={[styles.shadow, { shadowOpacity }]}
+            pointerEvents="none"
+          />
+        ) : null}
+        {bgOnlyDuringTransition ? (
+          <Animated.View
+            style={[
+              StyleSheet.absoluteFill,
+              { backgroundColor: '#fff', opacity: showBg },
+            ]}
             pointerEvents="none"
           />
         ) : null}

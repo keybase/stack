@@ -834,6 +834,7 @@ class StackViewLayout extends React.Component {
         position={this._getPosition()}
         realPosition={this.props.transitionProps.position}
         animatedStyle={style}
+        bgOnlyDuringTransition={this.props.bgOnlyDuringTransition}
         transparent={this.props.transparentCard}
         style={[{ paddingTop }, this.props.cardStyle]}
         scene={scene}
