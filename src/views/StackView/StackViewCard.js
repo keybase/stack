@@ -79,7 +79,13 @@ class Card extends React.Component {
           <Animated.View
             style={[
               StyleSheet.absoluteFill,
-              { backgroundColor: '#fff', opacity: showBg },
+              {
+                backgroundColor:
+                  typeof bgOnlyDuringTransition === 'string'
+                    ? bgOnlyDuringTransition
+                    : '#fff',
+                opacity: showBg,
+              },
             ]}
             pointerEvents="none"
           />
