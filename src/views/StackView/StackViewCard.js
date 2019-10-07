@@ -81,8 +81,8 @@ class Card extends React.Component {
               StyleSheet.absoluteFill,
               {
                 backgroundColor:
-                  typeof bgOnlyDuringTransition === 'string'
-                    ? bgOnlyDuringTransition
+                  typeof bgOnlyDuringTransition === 'function'
+                    ? bgOnlyDuringTransition()
                     : '#fff',
                 opacity: showBg,
               },
